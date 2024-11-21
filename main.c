@@ -40,7 +40,7 @@ int main()
 
 void cadastroLivros()
 {
-    // usar: fgets(variavel, sizeof(variavel), stdin); para não dar erro no cadastro
+    // usar ao inves do scanf: fgets(variavel, sizeof(variavel), stdin); para não dar erro no cadastro
 }
 
 void excluirLivros()
