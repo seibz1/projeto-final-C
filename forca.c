@@ -10,7 +10,7 @@ char chutes[26];
 int chutesdados = 0;
 
 
-int letraexiste(char letra) {
+int letraexiste(char letra) { //verifica se a letra esta presente na palavra escolhida
 
     for(int j = 0; j < strlen(palavrasecreta); j++) {
         if(letra == palavrasecreta[j]) {
@@ -21,7 +21,7 @@ int letraexiste(char letra) {
     return 0;
 }
 
-int chuteserrados() {
+int chuteserrados() { //contador pro numero de erros
     int erros = 0;
 
     for(int i = 0; i < chutesdados; i++) {
@@ -34,11 +34,11 @@ int chuteserrados() {
     return erros;
 }
 
-int enforcou() {
+int enforcou() { //fim do jogo, usa o numero de erros
     return chuteserrados() >= 5;
 }
 
-int ganhou() {
+int ganhou() { //fim do jogo, verifica se acertou a palavra
     for(int i = 0; i < strlen(palavrasecreta); i++) {
         if(!jachutou(palavrasecreta[i])) {
             return 0;
@@ -55,11 +55,11 @@ void abertura() {
     printf("/****************/\n\n");
 }
 
-void chuta() {
+void chuta() { //verifica o chute
     char chute;
     printf("Qual letra? ");
     scanf(" %c", &chute);
-    chute = toupper(chute);
+    chute = toupper(chute); //para colocar a letra escolhida em maiúscula no txt
 
     if(letraexiste(chute)) {
         printf("Voeê acertou: a palavra tem a letra %c\n\n", chute);
@@ -71,7 +71,7 @@ void chuta() {
     chutesdados++;
 }
 
-int jachutou(char letra) {
+int jachutou(char letra) { //usada pra encontrar onde a letra é usada
     int achou = 0;
     for(int j = 0; j < chutesdados; j++) {
         if(chutes[j] == letra) {
@@ -83,7 +83,7 @@ int jachutou(char letra) {
     return achou;
 }
 
-void desenhaforca() {
+void desenhaforca() { //desenho da forca
 
     int erros = chuteserrados();
 
@@ -110,7 +110,7 @@ void desenhaforca() {
 
 }
 
-void escolhepalavra(int *escolha) {
+void escolhepalavra(int *escolha) { //escolha do tema de palavra, ja abre o arquivo e retorna a escolha pra main via ponteiro 
     FILE* f;
 
     int opcao;
@@ -150,9 +150,6 @@ void escolhepalavra(int *escolha) {
         *escolha = opcao;
     }
     
-    
-
-    
     if(f == 0) {
         printf("Banco de dados de palavras nao disponivel\n\n");
         exit(1);
@@ -172,12 +169,12 @@ void escolhepalavra(int *escolha) {
 }
 
 
-void adicionapalavra(int opcao) {
+void adicionapalavra(int opcao) { //caso queira adicionar uma palavra
     char quer;
 
     printf("Você deseja adicionar uma nova palavra no jogo (S/N)?");
     scanf(" %c", &quer);
-    quer = toupper(quer);
+    quer = toupper(quer); //para colocar a escolha em maiúscula no txt
 
     if(quer == 'S') {
         char novapalavra[TAMANHO_PALAVRA];
