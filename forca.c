@@ -4,6 +4,7 @@
 #include <time.h>
 #include <ctype.h>
 #include "forca.h"
+#include <conio.h> //para o getch no final do programa
 
 char palavrasecreta[TAMANHO_PALAVRA];
 char chutes[26];
@@ -259,4 +260,6 @@ int main() {
     }
 
     adicionapalavra(opcao);
+    printf("Digite qualquer tecla para fechar");
+    getch(); //pra precisar digitar alguma tecla pra fechar o programa
 }
