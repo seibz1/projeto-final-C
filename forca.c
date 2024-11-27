@@ -62,9 +62,9 @@ void chuta() {
     chute = toupper(chute);
 
     if(letraexiste(chute)) {
-        printf("Você acertou: a palavra tem a letra %c\n\n", chute);
+        printf("Voeê acertou: a palavra tem a letra %c\n\n", chute);
     } else {
-        printf("\nVocê errou: a palavra NÃO tem a letra %c\n\n", chute);
+        printf("\nVoce errou: a palavra NAO tem a letra %c\n\n", chute);
     }
 
     chutes[chutesdados] = chute;
@@ -110,15 +110,15 @@ void desenhaforca() {
 
 }
 
-void escolhepalavra() {
+void escolhepalavra(int *escolha) {
     FILE* f;
 
     int opcao;
     printf("Escolha um tema para o jogo de forca:\n1. Animais\n2. Cores\n3. Paises ou Cidades\n4. Frutas\n5. Profissoes\nDigite o numero da opcao desejada: ");
     
 
-    // Switch para escolher o tema
-    while (opcao>5 || opcao<1)
+    
+    while (opcao>5 || opcao<1) //para escolher o tema
     {
         scanf("%d", &opcao);
         switch(opcao) {
@@ -145,14 +145,16 @@ void escolhepalavra() {
             default:
                 printf("Opcao invalida! Tente novamente: ");
                 break;
+                
         }
+        *escolha = opcao;
     }
     
     
 
     
     if(f == 0) {
-        printf("Banco de dados de palavras não disponível\n\n");
+        printf("Banco de dados de palavras nao disponivel\n\n");
         exit(1);
     }
 
@@ -170,7 +172,7 @@ void escolhepalavra() {
 }
 
 
-void adicionapalavra() {
+void adicionapalavra(int opcao) {
     char quer;
 
     printf("Você deseja adicionar uma nova palavra no jogo (S/N)?");
@@ -180,14 +182,20 @@ void adicionapalavra() {
     if(quer == 'S') {
         char novapalavra[TAMANHO_PALAVRA];
 
-        printf("Digite a nova palavra, em letras maiúsculas: ");
+        printf("Digite a nova palavra, em letras maiusculas: ");
         scanf("%s", &novapalavra);
 
         FILE* f;
-
-        f = fopen("animais.txt", "r+");
+        if(opcao==1){f = fopen("animais.txt", "r+");}
+        else if (opcao==2){f = fopen("cores.txt", "r+");}
+        else if (opcao==3){f = fopen("paisesecidades.txt", "r+");}
+        else if (opcao==4){f = fopen("frutas.txt", "r+");}
+        else if (opcao==5){f = fopen("profissoes.txt", "r+");}
+        
+        
+        
         if(f == 0) {
-            printf("Banco de dados de palavras não disponível\n\n");
+            printf("Banco de dados de palavras nao disponivel\n\n");
             exit(1);
         }
 
@@ -206,9 +214,9 @@ void adicionapalavra() {
 }
 
 int main() {
-
+    int opcao; //retorno da escolha de palavra, serve para caso o usuário queira adicionar alguma palavra em algum dos arquivos
     abertura();
-    escolhepalavra();
+    escolhepalavra(&opcao);
 
     do {
 
@@ -218,7 +226,7 @@ int main() {
     } while (!ganhou() && !enforcou());
 
     if(ganhou()) {
-        printf("\nParabéns, você ganhou!\n\n");
+        printf("\nParabens, voce ganhou!\n\n");
 
         printf("       ___________      \n");
         printf("      '._==_==_=_.'     \n");
@@ -253,5 +261,5 @@ int main() {
         printf("       \\_______/           \n");
     }
 
-    adicionapalavra();
+    adicionapalavra(opcao);
 }
