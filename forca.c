@@ -173,7 +173,7 @@ void escolhepalavra(int *escolha) { //escolha do tema de palavra, ja abre o arqu
 void adicionapalavra(int opcao) { //caso queira adicionar uma palavra
     char quer;
 
-    printf("Você deseja adicionar uma nova palavra no jogo (S/N)?");
+    printf("Voce deseja adicionar uma nova palavra nesse tema (S/N)?");
     scanf(" %c", &quer);
     quer = toupper(quer); //para colocar a escolha em maiúscula no txt
 
